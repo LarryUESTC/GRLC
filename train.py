@@ -599,11 +599,10 @@ if __name__ == '__main__':
         cprint("Use GPU the ID of which is {}".format(alloc_gpu), "yellow")
 
     # noinspection PyTypeChecker
-    t0 = time.perf_counter()
+
     # main_args.ir = 0.01
     many_seeds_result = run_with_many_seeds(main_args, num_total_runs, gpu_id=alloc_gpu[0], name=exp_name)
     newname = exp_name + "_" + '%.2f' % many_seeds_result
     if main_args.notation:
         newname = newname + "_" + main_args.notation
     os.rename(exp_name, newname)
-    cprint("Time for runs (s): {}".format(time.perf_counter() - t0))
