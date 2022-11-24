@@ -1,0 +1,211 @@
+DEFAULT: &DEFAULT
+  black_list: [1,2,3]
+  num_gpus_total: 4
+  num_gpus_to_use: 1
+  seed: 0
+  verbose: 2
+  save_model: False
+  save_plot: False
+  val_interval: 1
+
+GRLC: &GRLC
+  model_name: GRLC
+  <<: *DEFAULT
+
+GRLC-Cora: &GRLC-Cora
+  <<: *GRLC
+  black_list: [0,3,2]
+  lr: 0.005
+  out_heads: 1
+  task_type: Node_Transductive
+  val_interval: 1
+
+GRLC-Cora-classification: &GRLC-Cora-classification
+  <<: *GRLC-Cora
+  epochs: 500
+  dim: 256
+  dim_x: 2
+  w_loss1: 2.0
+  w_loss2: 0.001
+  margin1: 0.8
+  margin2: 0.2
+  NN: 10
+  num1: 100
+  wd: 0.01
+  dropout: 0.2
+
+GRLC-CiteSeer-classification: &GRLC-CiteSeer-classification
+  <<: *GRLC
+  lr: 0.005
+  task_type: Node_Transductive
+  val_interval: 1
+  epochs: 500
+  dim: 256
+  dim_x: 2
+  w_loss1: 2.0
+  w_loss2: 2.0
+  margin1: 0.7
+  margin2: 0.4
+  NewATop: 10
+  NN: 10
+  num1: 100
+  wd: 0.01
+  dropout: 0.2
+
+GRLC-PubMed: &GRLC-PubMed
+  <<: *GRLC
+  black_list: [0, 2,3]
+  lr: 0.01
+  out_heads: 8
+  task_type: Node_Transductive
+  val_interval: 1
+  num_hidden_features: 8
+
+GRLC-PubMed-classification:
+  <<: *GRLC-PubMed
+  l2_lambda: 0.0005
+  epochs: 5000
+  w_loss1: 2.0
+  w_loss2: 10.0
+  margin1: 0.4
+  margin2: 0.1
+  NewATop: 5
+  dim: 128
+  dim_x: 4
+  NN: 5
+  num1: 100
+  wd: 0.01
+  dropout: 0.2
+
+GRLC-WikiCS: &GRLC-WikiCS
+  <<: *GRLC
+  black_list: [0,1,2]
+  lr: 0.01
+  out_heads: 1
+  task_type: Node_Transductive
+  val_interval: 1
+  num_hidden_features: 8
+  epochs: 500
+  to_undirected_at_neg: True
+
+
+GRLC-WikiCS-classification:
+  <<: *GRLC-WikiCS
+  epochs: 5000
+  w_loss1: 2000
+  w_loss2: 20
+  margin1: 0.9
+  margin2: 0.1
+  dim: 512
+  dim_x: 1
+  NewATop: 0
+  dropout: 0.1
+  NN: 5
+  num1: 300
+  wd: 0.0
+
+GRLC-Photo: &GRLC-Photo
+  <<: *GRLC
+  black_list: [0, 3,1]
+  lr: 0.01
+  out_heads: 1
+  task_type: Node_Transductive
+  val_interval: 1
+  num_hidden_features: 8
+  epochs: 500
+  to_undirected_at_neg: True
+
+
+GRLC-Photo-classification:
+  <<: *GRLC-Photo
+  epochs: 2000
+  w_loss1: 200
+  w_loss2: 2
+  margin1: 0.9
+  margin2: 0.2
+  dim: 128
+  dim_x: 4
+  NewATop: 0
+  dropout: 0.1
+  NN: 5
+  num1: 200
+  wd: 0.0
+
+GRLC-Crocodile: &GRLC-Crocodile
+  <<: *GRLC
+  black_list: [2,0,3]
+  lr: 0.01
+  out_heads: 1
+  task_type: Node_Transductive
+  val_interval: 1
+  num_hidden_features: 8
+  epochs: 2000
+  to_undirected_at_neg: True
+
+GRLC-Crocodile-classification: &GRLC-Crocodile-classification
+  <<: *GRLC-Crocodile
+  epochs: 2000
+  w_loss1: 200
+  w_loss2: 2
+  margin1: 0.9
+  margin2: 0.2
+  dim: 256
+  dim_x: 2
+  NewATop: 0
+  dropout: 0.1
+  NN: 5
+  num1: 200
+  wd: 0.0
+
+GRLC-CoraFull: &GRLC-CoraFull
+  <<: *GRLC
+  black_list: [0,1,2]
+  lr: 0.01
+  out_heads: 1
+  task_type: Node_Transductive
+  val_interval: 1
+  num_hidden_features: 8
+  epochs: 4000
+  to_undirected_at_neg: True
+
+
+GRLC-CoraFull-classification:
+  <<: *GRLC-CoraFull
+  epochs: 4000
+  w_loss1: 400
+  w_loss2: 4
+  margin1: 0.9
+  margin2: 0.6
+  dim: 256
+  dim_x: 4
+  NewATop: 0
+  dropout: 0.1
+  NN: 5
+  num1: 200
+  wd: 0.0
+
+GRLC-DBLP: &GRLC-DBLP
+  <<: *GRLC
+  black_list: [1,2,3]
+  lr: 0.01
+  out_heads: 1
+  task_type: Node_Transductive
+  val_interval: 1
+  num_hidden_features: 8
+  epochs: 400
+  to_undirected_at_neg: True
+
+GRLC-DBLP-classification:
+  <<: *GRLC-DBLP
+  epochs: 400
+  w_loss1: 20
+  w_loss2: 20
+  margin1: 0.7
+  margin2: 0.1
+  dim: 512
+  dim_x: 1
+  NewATop: 0
+  dropout: 0.1
+  NN: 5
+  num1: 200
+  wd: 0.0
